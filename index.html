@@ -16,10 +16,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gestaffitto-landing.vercel.app/og-image.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/bricolage-grotesque-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/bricolage-grotesque-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/instrument-sans-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/instrument-sans-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/instrument-sans-latin-600-normal.woff2) format('woff2')}
 :root{
   --bg:#F2F5F3; --paper:#FFFFFF; --ink:#13233A; --muted:#51607A;
   --green:#17695A; --green-d:#0F4C41; --ochre:#E9B73A; --line:#D5DDD8;
@@ -130,7 +133,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         <button class="btn" type="submit">Entra in lista d'attesa</button>
       </form>
       <p class="msg" role="status" aria-live="polite"></p>
-      <p class="hint">Gratis. Ti scriviamo solo quando la versione online è pronta. <a href="https://gestione-affitto-casa-public.vercel.app/">Prova intanto la demo</a>. Inviando la tua email accetti l'<a href="privacy.html">informativa privacy</a>.</p>
+      <p class="hint">Gratis. Ti scriviamo solo quando la versione online è pronta. <a href="https://gestione-affitto-casa-public.vercel.app/">Prova intanto la demo</a>. Inviando la tua email accetti l'<a href="privacy.html">informativa privacy</a>. Il servizio è riservato a persone maggiorenni.</p>
     </div>
 
     <div class="receipt" aria-label="Esempio di ricevuta">
@@ -212,7 +215,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       <button class="btn" type="submit">Entra in lista d'attesa</button>
     </form>
     <p class="msg" role="status" aria-live="polite"></p>
-    <p class="hint">Inviando la tua email accetti l'<a href="privacy.html">informativa privacy</a>. Puoi cancellarti quando vuoi.</p>
+    <p class="hint">Inviando la tua email accetti l'<a href="privacy.html">informativa privacy</a>. Il servizio è riservato a persone maggiorenni. Puoi cancellarti quando vuoi.</p>
   </section>
 
 </div>
@@ -229,6 +232,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 // 1) Crea un form su formspree.io e incolla qui il tuo endpoint (es. https://formspree.io/f/abcdwxyz)
 var FORM_ENDPOINT = "https://formspree.io/f/xaeqvzyz";
 
+var PAGE_LOADED = Date.now();
+
 document.querySelectorAll("form[data-wl]").forEach(function(form){
   var msg = form.nextElementSibling;
   form.addEventListener("submit", function(e){
@@ -240,11 +245,12 @@ document.querySelectorAll("form[data-wl]").forEach(function(form){
       msg.classList.add("err"); return;
     }
     if(form._gotcha.value){ return; }
+    if(Date.now() - PAGE_LOADED < 2500){ return; }
     var btn = form.querySelector("button"); btn.disabled = true;
     fetch(FORM_ENDPOINT, {
       method:"POST",
       headers:{"Content-Type":"application/json","Accept":"application/json"},
-      body: JSON.stringify({email: email, source: "landing-gestaffitto"})
+      body: JSON.stringify({email: email, source: "landing-gestaffitto", _gotcha: form._gotcha.value})
     }).then(function(r){
       if(!r.ok) throw new Error();
       form.reset();
