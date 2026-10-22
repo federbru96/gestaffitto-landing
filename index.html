@@ -17,12 +17,12 @@
 <meta name="twitter:image" content="https://gestaffitto-landing.vercel.app/og-image.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
 <style>
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/bricolage-grotesque-latin-500-normal.woff2) format('woff2')}
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2')}
-@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/bricolage-grotesque-latin-800-normal.woff2) format('woff2')}
-@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/instrument-sans-latin-400-normal.woff2) format('woff2')}
-@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/instrument-sans-latin-500-normal.woff2) format('woff2')}
-@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/instrument-sans-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500;font-display:swap;src:url(bricolage-grotesque-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-display:swap;src:url(bricolage-grotesque-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-display:swap;src:url(bricolage-grotesque-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400;font-display:swap;src:url(instrument-sans-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:500;font-display:swap;src:url(instrument-sans-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:600;font-display:swap;src:url(instrument-sans-latin-600-normal.woff2) format('woff2')}
 :root{
   --bg:#F2F5F3; --paper:#FFFFFF; --ink:#13233A; --muted:#51607A;
   --green:#17695A; --green-d:#0F4C41; --ochre:#E9B73A; --line:#D5DDD8;
@@ -106,6 +106,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   .shots{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;padding-bottom:1rem;margin:0 -1.25rem;padding-left:1.25rem;padding-right:1.25rem}
   .shots figure{flex:0 0 78%;scroll-snap-align:start}
 }
+.demo-cred{margin-top:12px;padding:12px 14px;border:1px solid rgba(0,0,0,.12);border-radius:10px;font-size:14px;line-height:1.5;display:flex;flex-direction:column;gap:2px;background:rgba(255,255,255,.6)}
+.demo-cred code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px;word-break:break-all}
+.demo-cred .demo-note{opacity:.7;font-size:13px}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -134,6 +137,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       </form>
       <p class="msg" role="status" aria-live="polite"></p>
       <p class="hint">Gratis. Ti scriviamo solo quando la versione online è pronta. <a href="https://gestione-affitto-casa-public.vercel.app/">Prova intanto la demo</a>. Inviando la tua email accetti l'<a href="privacy.html">informativa privacy</a>. Il servizio è riservato a persone maggiorenni.</p>
+      <div class="demo-cred">
+        <strong>Credenziali della demo</strong>
+        <span>Inquilino (sola lettura): <code>inquilino@test.it</code> / <code>inquilino</code></span>
+        <span>Proprietario (gestione): <code>admin@test.com</code> / <code>admin</code></span>
+        <span class="demo-note">Dati di esempio: non inserire dati reali.</span>
+      </div>
     </div>
 
     <div class="receipt" aria-label="Esempio di ricevuta">
